@@ -6,6 +6,7 @@ class HappeningsController < ApplicationController
   end
 
   def show
+    @happening = Happening.find(params[:id])
 
   end
 
@@ -13,21 +14,8 @@ class HappeningsController < ApplicationController
 
   end
 
-  def edit
-
-  end
-
   def create
 
-  end
-
-
-  def update 
-
-  end
-
-  def destroy 
-    
   end
 
 end

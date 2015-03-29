@@ -1,7 +1,50 @@
-<h1> Happenings </h1>
 
-<% @happenings.each do |happening| %>
-  <%= happening.name %> 
-  <%= happening.info %>
+<div id="map-canvas"></div>
+<div class="container-fluid" id="main">
+  <div class="row">
+    <div class="col-xs-8" id="left">
+      <h2>HAPPENINGS</h2>
+      
+      <!-- item list -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <% @happenings.each do |happening| %>
+            <ul>
+              <li> <%= happening.group_name %> </li> 
+              <li> <%= happening.name %> </li> 
+              <li> Time: <%= happening.human_time %> </li>  
+              <li> Info: <%= sanitize(happening.description) %> </li>  
+            </ul> 
+          <% end %>
+        </div>     
+      </div>
+       
+      <hr>
+      
+      <p>
+      <a href="">CALENDAR</a> | <a href="">FULL MAP</a>
+      </p>
+      
+      <hr> 
+        
+      <p>
+      <a href="" target="_ext" class="center-block btn btn-primary">ADD HAPPENING</a>
+      </p>
+        
+      <hr>     
 
-<% end %>
+    </div>
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+    
+  </div>
+</div>
+<!-- end template -->
+
+  <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&output=embed"></script>
+    <script src="js/scripts.js"></script>
+
+
+
