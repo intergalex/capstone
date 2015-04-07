@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   
+  devise_for :users
   root 'happenings#index'
   resources :happenings 
 

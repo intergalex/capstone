@@ -3,18 +3,19 @@
 <div class="container-fluid" id="main">
   <div class="row">
     <div class="col-xs-8" id="left">
-      <h2>HAPPENINGS</h2>
-      
-      <!-- item list -->
+      <h1> HAPPENING IN CHICAGO </h1> 
+      <div ng-app="app">
+        {{ 1 + 1 }}
+      </div>
       <div class="panel panel-default">
         <div class="panel-heading">
           <% @happenings.each do |happening| %>
-            <ul>
-              <li> <%= happening.group_name %> </li> 
-              <li> <%= happening.name %> </li> 
-              <li> Time: <%= happening.human_time %> </li>  
-              <li> Info: <%= sanitize(happening.description) %> </li>  
-            </ul> 
+            <div id="happenings">
+              <h2> <%= happening.name %> </h2> 
+              <h3> Time: <%= happening.human_time %> </h3>  
+              <h3> <%= happening.group_name %> </h3> 
+              <p> Info: <%= sanitize(happening.description) %> </li>  
+            </div> 
           <% end %>
         </div>     
       </div>
