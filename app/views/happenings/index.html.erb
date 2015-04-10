@@ -3,34 +3,25 @@
 <div class="container-fluid" id="main">
   <div class="row">
     <div class="col-xs-8" id="left">
-      <h1> HAPPENING IN CHICAGO </h1> 
+      <h1> CIVIC HAPPENINGS </h1> 
       <div ng-app="app">
-        {{ 1 + 1 }}
-      </div>
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <% @happenings.each do |happening| %>
-            <div id="happenings">
-              <h2> <%= happening.name %> </h2> 
-              <h3> Time: <%= happening.human_time %> </h3>  
-              <h3> <%= happening.group_name %> </h3> 
-              <p> Info: <%= sanitize(happening.description) %> </li>  
-            </div> 
-          <% end %>
-        </div>     
-      </div>
-       
-      <hr>
-      
-      <p>
-      <a href="">CALENDAR</a> | <a href="">FULL MAP</a>
-      </p>
-      
-      <hr> 
-        
-      <p>
-      <a href="" target="_ext" class="center-block btn btn-primary">ADD HAPPENING</a>
-      </p>
+
+        <p>
+        <a href="" target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</a>
+        </p>
+
+        </div>
+        <% @happenings.each do |happening| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              <div id="happenings">
+                <h2> <%= happening.name %> </h2> 
+                <h3> <%= happening.human_time %> </h3>  
+                <!-- <p> <%= sanitize(happening.description) %> </li>  --> 
+              </div> 
+          </div>     
+        </div>
+        <% end %>
         
       <hr>     
 
