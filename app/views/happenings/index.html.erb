@@ -1,33 +1,41 @@
 
-<div id="map-canvas"></div>
-<div class="container-fluid" id="main">
-  <div class="row">
-    <div class="col-xs-8" id="left">
-      <h1> CIVIC HAPPENINGS </h1> 
-      <div ng-app="app">
-
-        <p>
-        <a href="" target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</a>
-        </p>
-
-        </div>
-        <% @happenings.each do |happening| %>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-              <div id="happenings">
-                <h2> <%= happening.name %> </h2> 
-                <h3> <%= happening.human_time %> </h3>  
-                <!-- <p> <%= sanitize(happening.description) %> </li>  --> 
-              </div> 
-          </div>     
-        </div>
-        <% end %>
-        
-      <hr>     
-
-    </div>
-    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+<div ng-app="app">
+  <div ng-controller="happeningsCtrl" ng-init="fetchData()">
     
+    <div id="map-canvas"> </div>
+    
+    <div class="container-fluid" id="main">
+      
+      <div class="row">
+        
+        <div class="col-xs-8" id="left">
+          
+          <h1 class="center"> CIVIC HAPPENINGS </h1> 
+          
+          <h3><a href="/happenings/new" target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</a></h3>
+          
+          <div ng-repeat="happeing in happeings">
+            <div class="panel panel-default">
+              <div class="panel-heading"> 
+                <!-- <div class ="source-{{ source }}"> -->
+                    <!-- <div ng-click="show=!show"> -->
+                      <h2> {{ happening.name }} </h2> 
+                      <h3> {{ happening.human_time }} </h3>
+                    <!-- /div>  --> 
+                      <!-- <p> <a href="{{happening.url }}"> </p>
+                      > -->  
+                      <!-- <p ng-hide="!show"> {{ sanitize(happening.description) }} </p>   -->   
+                <!-- </div> --> 
+              </div>         
+            </div>
+        </div>
+        
+        
+        <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+      </div>
+    
+    </div>
+
   </div>
 </div>
 <!-- end template -->
@@ -38,5 +46,40 @@
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&output=embed"></script>
     <script src="js/scripts.js"></script>
 
+
+<script>
+  $(document).ready(function(){
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+    function initialize() {
+
+      var mapOptions = {
+        center: new google.maps.LatLng(41.8369, -87.7847),
+        scrollWheel: true,
+        zoom: 10
+      };
+      
+      var markers = [
+        <% @happenings.each do |happening| %>
+         <% if happening.lat && happening.lon %>
+            new google.maps.Marker({
+              position: new google.maps.LatLng(<%= happening.lat %>, <%= happening.lon %>),
+              url: '/',
+              animation: google.maps.Animation.DROP
+            }),
+          <% end %>
+        <% end %>
+      ];
+      
+      var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+      
+      for(var i = 0; i < markers.length; i++){
+        markers[i].setMap(map);
+      }
+
+    };
+  });
+</script>
 
 

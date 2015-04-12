@@ -1,6 +1,6 @@
 class Happening
 
-  attr_reader :description, :name, :address, :group_name, :start_time, :formatted_time
+  attr_reader :description, :name, :address, :group_name, :start_time, :formatted_time, :url, :source, :lat, :lon
 
   # ////
   # MAYBE WILL NEED LATER
@@ -19,19 +19,9 @@ class Happening
       @start_time = hash["time"]
       @formatted_time = human_time  
       @group_name = hash["group"]["name"]
-
-      # ////
-      # SHOW PAGE INFO 
-      # ---------------------------------------
-      # @status = hash["status"]   
-      # if @venue_name 
-      #   @venue_name = hash["venue"]["name"]
-      # end
-      # @how_to_find_us = hash["how_to_find_us"]
-      # @event_url = hash["event_url"]
-      # @who = hash["group"]["who"]
-      # ----------------------------------------
-      # ///
+      @lat = hash["venue"]["lat"] if hash["venue"]
+      @lon = hash["venue"]["lon"] if hash["venue"]
+      @url = hash["event_url"]
 
     elsif source == "eventbrite"
       @name = hash["name"]["text"]
@@ -42,17 +32,10 @@ class Happening
       @formatted_time = human_time  
       @end_time = hash["end"]["local"]
 
-      # //// 
-      # ADDITIONAL INFO
-      # -------------------------------------------
-      # @status = hash["status"]
-      # @type = hash["format"]["name"]
-      # if @cost
-      #   @cost = hash["ticket_classes"]["cost"]["value"].to_i
-      # end
-      # @free = hash["ticket_classes"]["free"].to_i
-      # -------------------------------------------
-      # ////
+      @lat = hash["venue"]["latitude"]
+      @lon = hash["venue"]["longitude"]
+
+      @url = hash["url"]
 
     elsif source == "clearPath"
       @name = hash["eventName"]
@@ -63,13 +46,14 @@ class Happening
       @start_time = hash["eventStartDate"]
       @formatted_time = human_time
       @end_time = hash["eventEndDate"]
+      # @latlon = 
     end 
   end 
 
   def self.all
     meetup_array = Unirest.get("https://api.meetup.com/2/open_events.json?key=#{ENV['MEETUP_API_KEY']}&and_text=true&limited_events=true&text=politics&city=Chicago&state=IL&country=us&time=-0d,3d", :headers => {"Accept" => "application/json"}).body["results"] 
 
-    eventbrite_array = Unirest.get("https://www.eventbriteapi.com/v3/events/search/?venue.city=Chicago&categories=111%2C+112%2C+113&token=#{ENV['EVENTBRITE_API_KEY']}&start_date.range_end=2015-04-14T18%3A52%3A53Z", :headers => {"Accept" => "application/json"}).body["events"]
+    # eventbrite_array = Unirest.get("https://www.eventbriteapi.com/v3/events/search/?venue.city=Chicago&categories=111%2C+112%2C+113&token=#{ENV['EVENTBRITE_API_KEY']}&start_date.range_end=2015-04-14T18%3A52%3A53Z", :headers => {"Accept" => "application/json"}).body["events"]
 
     clearPath_array = Unirest.get("http://api1.chicagopolice.org/clearpath/api/1.0/communityCalendar/events?offset=10&order=asc&sort=eventStartDate&eventStartDate=#{Time.now.strftime('%m-%d-%Y')}", :headers => {"Accept" => "application/json"}).body
 
@@ -79,9 +63,9 @@ class Happening
       meetup_array.each do |meetup_hash|
         @happenings << Happening.new(meetup_hash, "meetup")
       end
-      eventbrite_array.each do |eventbrite_hash|
-        @happenings << Happening.new(eventbrite_hash, "eventbrite")
-      end
+      # eventbrite_array.each do |eventbrite_hash|
+      #   @happenings << Happening.new(eventbrite_hash, "eventbrite")
+      # end
       clearPath_array.each do |clearPath_hash|
         @happenings << Happening.new(clearPath_hash, "clearPath")
       end
@@ -102,6 +86,8 @@ class Happening
       DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
     end
   end
+
+
 
   # def self.find(id)
  

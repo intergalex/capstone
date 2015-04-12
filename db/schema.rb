@@ -11,38 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150406233556) do
+ActiveRecord::Schema.define(version: 20150412013736) do
 
-  create_table "doers", force: :cascade do |t|
-    t.string   "username",   limit: 255
-    t.string   "email",      limit: 255
-    t.datetime "join"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "happening_doers", force: :cascade do |t|
-    t.integer  "happening_id", limit: 4
-    t.integer  "doer_id",      limit: 4
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "happenings", force: :cascade do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "name",         limit: 255
-    t.datetime "datetime"
-    t.string   "info",         limit: 255
-    t.integer  "submitted_by", limit: 4
-    t.string   "address",      limit: 255
-    t.string   "city",         limit: 255
-    t.string   "state",        limit: 255
-    t.string   "zipcode",      limit: 255
-  end
-
-  create_table "types", force: :cascade do |t|
-    t.string   "name",       limit: 255
+  create_table "user_happenings", force: :cascade do |t|
+    t.string   "name",        limit: 255
+    t.string   "description", limit: 255
+    t.string   "start_time",  limit: 255
+    t.string   "location",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end

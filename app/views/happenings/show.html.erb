@@ -1,1 +1,34 @@
-<h1> Hey. </h1>
+
+<div id="map-canvas"></div>
+<div class="container-fluid" id="main">
+  <div class="row">
+    <div class="col-xs-8" id="left">
+      <div ng-app="app">
+        <h1> This is Happening. </h1> 
+          <div class="panel panel-default">
+            <div class="panel-heading">
+                <div id="happenings">
+                  <h2> <%= happening.name %> </h2> 
+                  <h3> <%= happening.human_time %> </h3>  
+                  <!-- <p> <%= sanitize(happening.description) %> </li>  --> 
+                </div> 
+            </div>     
+          </div>
+      </div>   
+      <hr>     
+
+    </div>
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+    
+  </div>
+</div>
+<!-- end template -->
+
+  <!-- script references -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&output=embed"></script>
+    <script src="js/scripts.js"></script>
+
+
+
