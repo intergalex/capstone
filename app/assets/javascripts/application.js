@@ -14,5 +14,6 @@
 //= require jquery_ujs
 //= require angular
 //= require angular-animate
+//= require angular-sanitize
 //= require app
 //= require_tree .

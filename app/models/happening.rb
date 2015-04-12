@@ -1,12 +1,6 @@
 class Happening
 
-  attr_reader :description, :name, :address, :group_name, :start_time, :formatted_time, :url, :source, :lat, :lon
-
-  # ////
-  # MAYBE WILL NEED LATER
-  # :how_to_find_us, :event_url,
-  # :venue_name, :status
-  # ////
+  attr_reader :description, :name, :address, :start_time, :formatted_time, :url, :source, :lat, :lon
 
   def initialize(hash, source)
     @source = source
@@ -45,8 +39,7 @@ class Happening
       @address = hash["location"]
       @start_time = hash["eventStartDate"]
       @formatted_time = human_time
-      @end_time = hash["eventEndDate"]
-      # @latlon = 
+      @end_time = hash["eventEndDate"] 
     end 
   end 
 
@@ -71,7 +64,7 @@ class Happening
       end
       @happenings.sort! do |a,b|  
         DateTime.parse(a.formatted_time) <=> DateTime.parse(b.formatted_time)
-      end
+      end  
     return @happenings
   end
 

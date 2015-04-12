@@ -1,43 +1,35 @@
 
 <div ng-app="app">
   <div ng-controller="happeningsCtrl" ng-init="fetchData()">
-    
-    <div id="map-canvas"> </div>
-    
     <div class="container-fluid" id="main">
       
-      <div class="row">
+      <div class="row">    
         
-        <div class="col-xs-8" id="left">
-          
+        <div class="col-xs-8" id="left"> 
           <h1 class="center"> CIVIC HAPPENINGS </h1> 
-          
           <h3><a href="/happenings/new" target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</a></h3>
-          
-          <div ng-repeat="happeing in happeings">
-            <div class="panel panel-default">
-              <div class="panel-heading"> 
-                <!-- <div class ="source-{{ source }}"> -->
-                    <!-- <div ng-click="show=!show"> -->
-                      <h2> {{ happening.name }} </h2> 
-                      <h3> {{ happening.human_time }} </h3>
-                    <!-- /div>  --> 
-                      <!-- <p> <a href="{{happening.url }}"> </p>
-                      > -->  
-                      <!-- <p ng-hide="!show"> {{ sanitize(happening.description) }} </p>   -->   
-                <!-- </div> --> 
-              </div>         
+
+            <div ng-repeat="happening in happenings">
+              <div class="panel panel-default">
+                
+                <div class="panel-heading source-{{ source }}" ng-click="toggleDescriptionVisible(happening)"> 
+                  <h2> {{ happening.name }} <h2>  
+                  <h3> {{ happening.human_time }} </h3> 
+                  <p ng-if="happening.descriptionVisible" ng-bind-html="makeTrust(happening.description)"> {{ happening.description }} </p>   
+                  <p> <a href=" {{ happening.url }} "> Event Link </a> </p>
+                </div>            
+              </div>
             </div>
         </div>
-        
-        
+  
         <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
+        <div id="map-canvas"> </div>
       </div>
-    
     </div>
+  </div> 
+</div> 
 
-  </div>
-</div>
+
 <!-- end template -->
 
   <!-- script references -->

@@ -1,7 +1,7 @@
 (function() {
   "use strict";
 
-  angular.module("app").controller("happeningsCtrl", function($scope, $http){
+  angular.module("app").controller("happeningsCtrl", function($scope, $http, $sce){
 
   $scope.fetchData = function() {
     $http.get("/api/v1/happenings.json").then(function(response) {
@@ -9,7 +9,15 @@
     });
   };
 
+  $scope.toggleDescriptionVisible = function(happening) {
 
+        happening.descriptionVisible = !happening.descriptionVisible;
+
+      };
+
+  $scope.makeTrust = function(html){
+        return $sce.trustAsHtml(html);
+      };
   // $scope.addHappening = function(newFirstName, newLastName, newBio) {
   //   var happening = {
   //     name: newName,

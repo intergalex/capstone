@@ -5,6 +5,7 @@ json.happenings @happenings do |happening|
   json.address happening.address
   json.lat happening.lat
   json.lon happening.lon
-
+  json.source happening.source
+  json.url happening.url
 end
 
