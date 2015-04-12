@@ -1,35 +1,68 @@
+<div id="map-canvas"> </div>   
 
-<div ng-app="app">
-  <div ng-controller="happeningsCtrl" ng-init="fetchData()">
-    <div class="container-fluid" id="main">
-      
-      <div class="row">    
-        
-        <div class="col-xs-8" id="left"> 
-          <h1 class="center"> CIVIC HAPPENINGS </h1> 
-          <h3><a href="/happenings/new" target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</a></h3>
+<div class="container-fluid" id="main">    
+  <div class="row">
+
+    <div class="col-xs-8" id="left">
+        <h1 class="center"> CIVIC HAPPENINGS </h1> 
+      <div ng-app="app">  
+         <div ng-controller="happeningsCtrl" ng-init="fetchData()">
+
+            <div ng-click="show=!show">
+              <h3 target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</h3>
+            </div>
+            <div ng-hide="!show">
+              <form action="" method="post" class="elegant-aero">
+                  <h1>What's Happening? 
+                      <span>Please fill all the texts in the fields.</span>
+                  </h1>
+                  <label>
+                      <span>Happening Name :</span>
+                      <input id="name" type="text" name="name" placeholder="Happening Name" />
+                  </label>
+                  
+                  <label>
+                      <span>Time :</span>
+                      <input id="email" type="email" name="email" placeholder="Valid Time." />
+                  </label>
+                  
+                  <label>
+                      <span>Description :</span>
+                      <textarea id="message" name="message" placeholder="Describe this happening"></textarea>
+                  </label> 
+                   <label>
+                      <span>Subject :</span><select name="selection">
+                      <option value="Community Meeting">Community Meeting</option>
+                      <option value="Talk">Talk</option>
+                      <option value="Protest">Protest</option>
+                      </select>
+                  </label>    
+                   <label>
+                      <span>&nbsp;</span> 
+                      <input ng-click="addHappening" type="button" class="button" value="Send" /> 
+                  </label>    
+              </form> 
+            </div>
 
             <div ng-repeat="happening in happenings">
-              <div class="panel panel-default">
-                
+              <div class="panel panel-default">  
                 <div class="panel-heading source-{{ source }}" ng-click="toggleDescriptionVisible(happening)"> 
                   <h2> {{ happening.name }} <h2>  
                   <h3> {{ happening.human_time }} </h3> 
                   <p ng-if="happening.descriptionVisible" ng-bind-html="makeTrust(happening.description)"> {{ happening.description }} </p>   
                   <p> <a href=" {{ happening.url }} "> Event Link </a> </p>
-                </div>            
+                </div>       
               </div>
             </div>
-        </div>
-  
-        <div class="col-xs-4"><!--map-canvas will be postioned here--></div>
-        <div id="map-canvas"> </div>
+
+          </div>
       </div>
     </div>
+
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div> 
+
   </div> 
 </div> 
-
-
 <!-- end template -->
 
   <!-- script references -->
