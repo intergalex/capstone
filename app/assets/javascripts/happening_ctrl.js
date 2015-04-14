@@ -3,6 +3,9 @@
 
   angular.module("app").controller("happeningsCtrl", function($scope, $http, $sce){
 
+  $scope.show = false;
+  $scope.happenings = [];
+
   $scope.fetchData = function() {
     $http.get("/api/v1/happenings.json").then(function(response) {
       $scope.happenings = response.data["happenings"];
@@ -19,20 +22,22 @@
         return $sce.trustAsHtml(html);
       };
 
-  $scope.addHappening = function(newFirstName, newLastName, newBio) {
+  $scope.addHappening = function(newName, newAddress, newTime, newDescription, newType) {
     var happening = {
       name: newName,
       address: newAddress,
+      human_time: newTime,
       description: newDescription,
-      human_time: newStartTime 
+      type: newType
     };
 
-    $http.post('api/v1/happenings.json', happeing).then(function(response) {
-        $scope.happenings.push(character);
-        $scope.newName = null;
-        $scope.newAddress = null;
-        $scope.newDescription = null;
-        $scope.newStartTime = null;
+    $http.post('api/v1/happenings.json', happening).then(function(response) {
+        $scope.happenings.push(happening);
+        $scope.happeningName = null;
+        $scope.happeningAddress = null;
+        $scope.happeningTime = null;
+        $scope.happeningDescription = null;
+        $scope.happeningType = null;
       }, function(error) {
         $scope.errors = error.data.errors;
       });  

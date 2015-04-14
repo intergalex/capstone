@@ -39,7 +39,12 @@ class Happening
       @address = hash["location"]
       @start_time = hash["eventStartDate"]
       @formatted_time = human_time
-      @end_time = hash["eventEndDate"] 
+    elsif source == "database"
+      @name = hash["name"]
+      @address = hash["location"]
+      @start_time = hash["start_time"]
+      @description = hash["description"]
+      @formatted_time = human_time
     end 
   end 
 
@@ -53,18 +58,24 @@ class Happening
     # chiPubLib_array = Unirest.get("https://chipublib.bibliocommons.com/events/events/rss/all")
 
     @happenings = []
-      meetup_array.each do |meetup_hash|
-        @happenings << Happening.new(meetup_hash, "meetup")
-      end
-      # eventbrite_array.each do |eventbrite_hash|
-      #   @happenings << Happening.new(eventbrite_hash, "eventbrite")
-      # end
-      clearPath_array.each do |clearPath_hash|
-        @happenings << Happening.new(clearPath_hash, "clearPath")
-      end
-      @happenings.sort! do |a,b|  
-        DateTime.parse(a.formatted_time) <=> DateTime.parse(b.formatted_time)
-      end  
+
+    meetup_array.each do |meetup_hash|
+      @happenings << Happening.new(meetup_hash, "meetup")
+    end
+    # eventbrite_array.each do |eventbrite_hash|
+    #   @happenings << Happening.new(eventbrite_hash, "eventbrite")
+    # end
+    clearPath_array.each do |clearPath_hash|
+      @happenings << Happening.new(clearPath_hash, "clearPath")
+    end
+
+    UserHappening.all.each do |user_happening|
+      @happenings << Happening.new(user_happening.serializable_hash, "database")
+    end
+
+    @happenings.sort! do |a,b|  
+      DateTime.parse(a.formatted_time) <=> DateTime.parse(b.formatted_time)
+    end  
     return @happenings
   end
 
@@ -77,15 +88,11 @@ class Happening
       DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
     elsif @source == "clearPath"
       DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
+    elsif @source == "database"
+      #DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
+      Time.now.strftime("%b %e %Y %l:%m %p")
     end
   end
-
-
-
-  # def self.find(id)
- 
-
-
 
 end
 

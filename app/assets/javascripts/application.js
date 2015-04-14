@@ -16,4 +16,6 @@
 //= require angular-animate
 //= require angular-sanitize
 //= require app
+//= require bootstrap-datepicker
 //= require_tree .
+

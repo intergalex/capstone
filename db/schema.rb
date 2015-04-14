@@ -11,15 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150412013736) do
+ActiveRecord::Schema.define(version: 20150414014907) do
 
   create_table "user_happenings", force: :cascade do |t|
     t.string   "name",        limit: 255
     t.string   "description", limit: 255
-    t.string   "start_time",  limit: 255
-    t.string   "location",    limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address",     limit: 255
+    t.datetime "start_time"
+    t.float    "latitude",    limit: 24
+    t.float    "longitude",   limit: 24
   end
 
   create_table "users", force: :cascade do |t|
