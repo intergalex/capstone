@@ -5,7 +5,7 @@ class Api::V1::HappeningsController < ApplicationController
   end
 
   def create
-    @happening = UserHappening.new(:name => params[:name], :description => params[:description], :start_time => params[:human_time].to_i, :address => params[:address])
+    @happening = UserHappening.new(:name => params[:name], :description => params[:description], :start_time => params[:start_time], :address => params[:address])
     if @happening.save
 
     else

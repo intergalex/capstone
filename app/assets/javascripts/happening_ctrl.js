@@ -22,14 +22,16 @@
         return $sce.trustAsHtml(html);
       };
 
-  $scope.addHappening = function(newName, newAddress, newTime, newDescription, newType) {
+  $scope.addHappening = function(newName, newAddress, newTime, newDescription) {
+    // $scope.$apply();
+
     var happening = {
       name: newName,
       address: newAddress,
-      human_time: newTime,
+      start_time: $scope.happeningTime,
       description: newDescription,
-      type: newType
     };
+    console.log(newTime);
 
     $http.post('api/v1/happenings.json', happening).then(function(response) {
         $scope.happenings.push(happening);
@@ -37,7 +39,6 @@
         $scope.happeningAddress = null;
         $scope.happeningTime = null;
         $scope.happeningDescription = null;
-        $scope.happeningType = null;
       }, function(error) {
         $scope.errors = error.data.errors;
       });  

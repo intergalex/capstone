@@ -61,3 +61,13 @@ body{
     bottom:0;
     overflow:hidden;
 }
+
+.inputs {
+  right: 14px;
+  padding-top: 5px;
+  font-size: 10px;
+}
+
+#jumbotron-padding {
+  padding: 15px;
+}

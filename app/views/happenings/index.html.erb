@@ -13,29 +13,39 @@
             </div>
 
             <div ng-show="show">
-              Name: <input ng-model="happeningName"> 
-              Address: <input ng-model="happeningAddress"> 
-              <div class="container">
-                  <div class="row">
-                      <div class='col-sm-6'>
-                          <div class="form-group">
-                              <div class='input-group date' id='datetimepicker1'>
-                                  <input type='text' class="form-control" />
-                                  <span class="input-group-addon">
-                                      <span class="glyphicon glyphicon-calendar"></span>
-                                  </span>
-                              </div>
-                          </div>
-                      </div>
-                      <script type="text/javascript">
-                          
-                      </script>
-                  </div>
+              <div id="jumbotron-padding" class="jumbotron">
+                <div class="inputs">
+                  Name: <input class="form-control" ng-model="happeningName"> 
+                </div>
+                <div class="inputs">
+                  Address: <input class="form-control" ng-model="happeningAddress"> 
+                </div> 
+                
+                <div class="container">
+                    <div class="row">
+                        <div class='col-sm-6'>
+                            <div class="form-group">
+                                <div class='input-group date inputs' id='datetimepicker1'>
+                                    Date and Time: <input type='text' class="form-control" ng-model="happeningTime">
+                                    <span class="input-group-addon">
+                                        <span class="glyphicon glyphicon-calendar"></span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <script type="text/javascript">                        
+                        </script>
+                    </div>
+                </div>
+                
+                <div class="inputs">
+                  Description: <textarea class="form-control inputs" ng-model="happeningDescription"></textarea>
+                </div>
+                  <div class="center inputs">  
+                    <button class="btn btn-primary btn-lg" ng-click="addHappening(happeningName, happeningAddress, happeningTime, happeningDescription)">Make it Happen</button>
+                  </div>  
               </div>
-              <!-- <input ng-model="happeningTime"/> -->
-              Description: <textarea ng-model="happeningDescription"></textarea>
-              <button ng-click="addHappening(happeningName, happeningAddress, happeningTime, happeningDescription, HappeningType)">Make it Happen</button>
-            </div>
+            </div> 
 
             <div ng-repeat="happening in happenings">
               <div class="panel panel-default">  
@@ -53,7 +63,7 @@
       </div>
     </div>
 
-    <div class="col-xs-4"><!--map-canvas will be postioned here--></div> 
+      <div class="col-xs-4"><!--map-canvas will be postioned here--></div> 
   </div> 
 </div> 
 <!-- end template -->
