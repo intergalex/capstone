@@ -2,6 +2,8 @@ class UserHappening < ActiveRecord::Base
 
   belongs_to :user 
 
+
+
   
   def human_time
     if @source == "meetup"
@@ -13,7 +15,7 @@ class UserHappening < ActiveRecord::Base
     elsif @source == "clearPath"
       DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
     elsif @source == "database"
-      Time.now.strftime("%b %e %Y %l:%m %p")
+      @start_time
     end
   end
 end

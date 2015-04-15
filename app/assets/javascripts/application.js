@@ -12,10 +12,15 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require moment
+//= require bootstrap-datetimepicker
 //= require angular
 //= require angular-animate
 //= require angular-sanitize
 //= require app
-//= require bootstrap-datepicker
 //= require_tree .
+
+$(document).ready(function () {
+  $('#datetimepicker1').datetimepicker();
+});
 

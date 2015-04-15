@@ -6,45 +6,52 @@ class Happening
     @source = source
     if source == "meetup"
       @name = hash["name"]
-      @description = hash["description"]
-      if @address 
-        @address = hash["venue"]["address_1"]
-      end
-      @start_time = hash["time"]
-      @formatted_time = human_time  
-      @group_name = hash["group"]["name"]
+      @description = hash["description"] 
+      
+      @address = hash["venue"]["address_1"] if hash["venue"]
       @lat = hash["venue"]["lat"] if hash["venue"]
       @lon = hash["venue"]["lon"] if hash["venue"]
+      
+      @start_time = hash["time"]
+      @formatted_time = human_time  
+      
+      @group_name = hash["group"]["name"]
       @url = hash["event_url"]
+      
 
     elsif source == "eventbrite"
       @name = hash["name"]["text"]
       @description = hash["description"]["html"]
-      @address = hash["venue"]["address_1"]
+      
+      @address = hash["venue"]["address_1"] if hash["venue"]
+      @lat = hash["venue"]["latitude"]
+      @lon = hash["venue"]["longitude"]
       
       @start_time = hash["start"]["local"]
       @formatted_time = human_time  
-      @end_time = hash["end"]["local"]
-
-      @lat = hash["venue"]["latitude"]
-      @lon = hash["venue"]["longitude"]
 
       @url = hash["url"]
 
     elsif source == "clearPath"
       @name = hash["eventName"]
-      if @description
-        @description = hash["eventDetails"]
-      end
+      @description = hash["eventDetails"] if hash["eventDetails"]
+      
       @address = hash["location"]
+      
       @start_time = hash["eventStartDate"]
       @formatted_time = human_time
+
     elsif source == "database"
       @name = hash["name"]
-      @address = hash["location"]
-      @start_time = hash["start_time"]
       @description = hash["description"]
+      
+      @address = hash["location"]
+      # @lat = hash["latitude"]
+      # @lon = hahs["longitude"]
+      
+      @start_time = hash["start_time"]
       @formatted_time = human_time
+      
     end 
   end 
 

@@ -12,15 +12,26 @@
               <h3 target="_ext" class="center-block btn btn-primary">MAKE SOMETHING HAPPEN</h3>
             </div>
 
-            <div id="form" ng-hide="!show">
-              Name: <input ng-model="happeningName"/>
-              Address: <input ng-model="happeningAddress"/>
-              <div class="input-group date">
-                <input type="text" class="form-control"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+            <div ng-show="show">
+              Name: <input ng-model="happeningName"> 
+              Address: <input ng-model="happeningAddress"> 
+              <div class="container">
+                  <div class="row">
+                      <div class='col-sm-6'>
+                          <div class="form-group">
+                              <div class='input-group date' id='datetimepicker1'>
+                                  <input type='text' class="form-control" />
+                                  <span class="input-group-addon">
+                                      <span class="glyphicon glyphicon-calendar"></span>
+                                  </span>
+                              </div>
+                          </div>
+                      </div>
+                      <script type="text/javascript">
+                          
+                      </script>
+                  </div>
               </div>
-              <script type="text/javascript">
-                $('.input-group.date').datepicker({});
-              </script>
               <!-- <input ng-model="happeningTime"/> -->
               Description: <textarea ng-model="happeningDescription"></textarea>
               <button ng-click="addHappening(happeningName, happeningAddress, happeningTime, happeningDescription, HappeningType)">Make it Happen</button>
@@ -31,6 +42,7 @@
                 <div class="panel-heading source-{{ source }}" ng-click="toggleDescriptionVisible(happening)"> 
                   <h2> {{ happening.name }} <h2>  
                   <h3> {{ happening.human_time }} </h3> 
+                  <h3> {{ happening.address }} </h3> 
                   <p ng-if="happening.descriptionVisible" ng-bind-html="makeTrust(happening.description)"> {{ happening.description }} </p>   
                   <p> <a href=" {{ happening.url }} "> Event Link </a> </p>
                 </div>       
@@ -47,7 +59,6 @@
 <!-- end template -->
 
   <!-- script references -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
     <!-- <script src="js/bootstrap.min.js"></script> -->
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js&output=embed"></script>
     <!-- <script src="js/scripts.js"></script> -->
@@ -80,42 +91,34 @@
       
       var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
 
-      var contentString = '<div id="content">'+
-          '<div id="siteNotice">'+
-          '</div>'+
-          '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-          '<div id="bodyContent">'+
-          '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-          'sandstone rock formation in the southern part of the '+
-          'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-          'south west of the nearest large town, Alice Springs; 450&#160;km '+
-          '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-          'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-          'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-          'Aboriginal people of the area. It has many springs, waterholes, '+
-          'rock caves and ancient paintings. Uluru is listed as a World '+
-          'Heritage Site.</p>'+
-          '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-          'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-          '(last visited June 22, 2009).</p>'+
-          '</div>'+
-          '</div>';
+      var contentString = []
+          <% @happenings.each do |happening| %>
+            <% if happening.lat && happening.lon %>
+              contentString.push(
+              '<div id="content">'+
+                '<div id="siteNotice">'+ '</div>'+
+                  '<h1 id="firstHeading" class="firstHeading"><%= happening.name %></h1>'+
+                  '<div id="bodyContent">'+
+                    '<p><b><%= happening.human_time %></b></p>'+
+                    '<p><%= happening.address %> '+ 
+                    '<p>LINK <a href="<%= happening.url %>"></p>'+
+                  '</div>'+
+              '</div>');
+            <% end %>
+          <% end %> 
 
-      for(var i = 0; i < markers.length; i++){
+      var infowindow = new google.maps.InfoWindow();
+
+      for(var i = 0; i <   markers.length; i++){  
         markers[i].setMap(map);
-        var infowindow = new google.maps.InfoWindow({
-            content: contentString
-        });
-        google.maps.event.addListener(markers[i], 'click', function() {
-          infowindow.open(map,markers[i]);
-        });
+        
+        google.maps.event.addListener(markers[i], 'click', (function(markers, i) {
+          return function() {
+            infowindow.setContent(contentString[i]);
+            infowindow.open(map,markers[i]);
+          }
+        })(markers, i));
       }
-
-        
-
-        
-
-        
 
     };
   });
