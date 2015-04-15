@@ -20,7 +20,4 @@
 //= require app
 //= require_tree .
 
-$(document).ready(function () {
-  $('#datetimepicker1').datetimepicker();
-});
 

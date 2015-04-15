@@ -1,4 +1,4 @@
-class Happening
+class Happening 
 
   attr_reader :description, :name, :address, :start_time, :formatted_time, :url, :source, :lat, :lon
 

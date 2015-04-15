@@ -4,7 +4,7 @@
   <div class="row">
 
     <div class="col-xs-8" id="left">
-        <h1 class="center"> CIVIC HAPPENINGS </h1> 
+      <h1 class="center"> CIVIC HAPPENINGS </h1> 
       <div ng-app="app">  
          <div ng-controller="happeningsCtrl" ng-init="fetchData()">
 
@@ -14,44 +14,49 @@
 
             <div ng-show="show">
               <div id="jumbotron-padding" class="jumbotron">
-                <div class="inputs">
-                  Name: <input class="form-control" ng-model="happeningName"> 
-                </div>
-                <div class="inputs">
-                  Address: <input class="form-control" ng-model="happeningAddress"> 
+                  <div class="inputs">
+                    Name: <input class="form-control" ng-model="happeningName"> 
+                  </div>
+                  <div class="inputs">
+                    Address: <input class="form-control" ng-model="happeningAddress">
                 </div> 
-                
+
                 <div class="container">
                     <div class="row">
                         <div class='col-sm-6'>
                             <div class="form-group">
                                 <div class='input-group date inputs' id='datetimepicker1'>
-                                    Date and Time: <input type='text' class="form-control" ng-model="happeningTime">
+
+                                    Date and Time: <input id="time" type='text' class="form-control" ng-model="happeningTime">
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <script type="text/javascript">                        
+                        <script type="text/javascript">
+                          $(document).ready(function () {
+                            $('#datetimepicker1').datetimepicker();
+                          });
                         </script>
                     </div>
                 </div>
+
                 
                 <div class="inputs">
                   Description: <textarea class="form-control inputs" ng-model="happeningDescription"></textarea>
                 </div>
-                  <div class="center inputs">  
-                    <button class="btn btn-primary btn-lg" ng-click="addHappening(happeningName, happeningAddress, happeningTime, happeningDescription)">Make it Happen</button>
-                  </div>  
+                <div class="center inputs">  
+                  <button class="btn btn-primary btn-lg" ng-click="addHappening(happeningName, happeningAddress, happeningTime, happeningDescription)">Make it Happen</button>
+                </div>  
               </div>
             </div> 
 
             <div ng-repeat="happening in happenings">
               <div class="panel panel-default">  
                 <div class="panel-heading source-{{ source }}" ng-click="toggleDescriptionVisible(happening)"> 
-                  <h2> {{ happening.name }} <h2>  
-                  <h3> {{ happening.human_time }} </h3> 
+                  <h2> {{ happening.name }} <h2> 
+                  <h3> {{ happening.start_time }} </h3> 
                   <h3> {{ happening.address }} </h3> 
                   <p ng-if="happening.descriptionVisible" ng-bind-html="makeTrust(happening.description)"> {{ happening.description }} </p>   
                   <p> <a href=" {{ happening.url }} "> Event Link </a> </p>
@@ -63,7 +68,7 @@
       </div>
     </div>
 
-      <div class="col-xs-4"><!--map-canvas will be postioned here--></div> 
+    <div class="col-xs-4"><!--map-canvas will be postioned here--></div> 
   </div> 
 </div> 
 <!-- end template -->
