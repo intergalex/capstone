@@ -7,5 +7,6 @@ json.happenings @happenings do |happening|
   json.lon happening.lon
   json.source happening.source
   json.url happening.url
+  json.group_name happening.group_name
 end
 

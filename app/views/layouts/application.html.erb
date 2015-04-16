@@ -6,7 +6,8 @@
     <title>Civic Chicago</title>
     <meta name="generator" content="Bootply" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href="" rel="stylesheet">
+    <!-- <link href="" rel="stylesheet"> -->
+    <link href='http://fonts.googleapis.com/css?family=Allerta+Stencil' rel='stylesheet' type='text/css'>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
     <%= csrf_meta_tags %>
@@ -51,9 +52,9 @@
       </div>
   </div>
 
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>  
-
+  <!-- <div class="alert alert-success" role="alert">Hey.</div> -->
+  <!--   <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>-->
 <%= yield %>
 
 </body>

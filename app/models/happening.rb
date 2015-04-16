@@ -1,6 +1,6 @@
 class Happening 
 
-  attr_reader :description, :name, :address, :start_time, :formatted_time, :url, :source, :lat, :lon
+  attr_reader :description, :name, :address, :start_time, :formatted_time, :url, :source, :lat, :lon, :group_name
 
   def initialize(hash, source)
     @source = source

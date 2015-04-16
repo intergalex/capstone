@@ -31,7 +31,6 @@
       start_time: newTime,
       description: newDescription,
     };
-debugger
     $http.post('api/v1/happenings.json', happening).then(function(response) {
         $scope.happenings.push(happening);
         $scope.happeningName = null;
