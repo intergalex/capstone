@@ -46,8 +46,8 @@ class Happening
       @description = hash["description"]
       
       @address = hash["location"]
-      # @lat = hash["latitude"]
-      # @lon = hahs["longitude"]
+      @lat = hash["latitude"]
+      @lon = hash["longitude"]
       
       @start_time = hash["start_time"]
       @formatted_time = human_time
@@ -96,9 +96,7 @@ class Happening
     elsif @source == "clearPath"
       DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
     elsif @source == "database"
-      # Time.now.strftime("%b %e %Y %l:%m %p")
-      # @start_time
-      DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
+      DateTime.parse(@start_time.to_s).strftime("%b %e %Y %l:%m %p")
     end
   end
 

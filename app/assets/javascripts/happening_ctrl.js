@@ -23,18 +23,15 @@
         return $sce.trustAsHtml(html);
   };
 
-  // $scope.parent = {happeningTime:''};
 
-  $scope.addHappening = function(newName, newAddress, newTime, newDescription) {
-    // $scope.$apply();
-    // document.getElementById('time').value 
+  $scope.addHappening = function(newName, newAddress, newTime, newDescription) { 
     var happening = {
       name: newName,
       address: newAddress,
       start_time: newTime,
       description: newDescription,
     };
-
+debugger
     $http.post('api/v1/happenings.json', happening).then(function(response) {
         $scope.happenings.push(happening);
         $scope.happeningName = null;

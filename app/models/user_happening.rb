@@ -17,9 +17,7 @@ class UserHappening < ActiveRecord::Base
     elsif @source == "clearPath"
       DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
     elsif @source == "database"
-      # Time.now.strftime("%b %e %Y %l:%m %p")
-      # @start_time
-      DateTime.parse(@start_time).strftime("%b %e %Y %l:%m %p")
+      DateTime.parse(@start_time.to_s).strftime("%b %e %Y %l:%m %p")
     end
   end
 end

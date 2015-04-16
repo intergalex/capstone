@@ -30,6 +30,7 @@ gem 'geocoder'
 gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.7.14'
 gem 'pry'
+gem "bower-rails", "~> 0.9.2"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

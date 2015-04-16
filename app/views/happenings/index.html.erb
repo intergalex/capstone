@@ -25,20 +25,16 @@
                     <div class="row">
                         <div class='col-sm-6'>
                             <div class="form-group">
-                                <div class='input-group date inputs' id='datetimepicker1'>
+                                <div class='input-group date inputs'>
 
-                                    Date and Time: <input id="time" type='text' class="form-control" ng-model="happeningTime">
+                                    Date and Time: <input id='datetimepicker' type='text' class="form-control" ng-model="happeningTime">
                                     <span class="input-group-addon">
-                                        <span class="glyphicon glyphicon-calendar"></span>
+                                        <!-- <span class="glyphicon glyphicon-calendar"></span> -->
                                     </span>
                                 </div>
                             </div>
                         </div>
-                        <script type="text/javascript">
-                          $(document).ready(function () {
-                            $('#datetimepicker1').datetimepicker();
-                          });
-                        </script>
+
                     </div>
                 </div>
 
@@ -136,6 +132,11 @@
       }
 
     };
+  });
+</script>
+<script type="text/javascript">
+  $(document).ready(function () {
+   $('#datetimepicker').datetimepicker();
   });
 </script>
 
