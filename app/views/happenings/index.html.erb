@@ -2,9 +2,7 @@
 
 <div class="container-fluid" id="main">    
   <div class="row">
-
     <div class="col-xs-8" id="left">
-
       <h1 class="center headline"> CIVIC HAPPENINGS </h1> 
       <div ng-app="app">  
          <div ng-controller="happeningsCtrl" ng-init="fetchData()">
@@ -14,41 +12,39 @@
             </div>
 
             <div ng-show="show">
-              <div id="jumbotron-padding" class="jumbotron ng-enter">
-                  <div class="inputs">
-                    Name: <input class="form-control" ng-model="happeningName"> 
-                  </div>
-                  <div class="inputs">
-                    Address: <input class="form-control" ng-model="happeningAddress">
+              <div id="jumbotron-padding" class="jumbotron">
+                <div class="inputs">
+                  Name: <input class="form-control" ng-model="happeningName"> 
+                </div>
+                <div class="inputs">
+                  Address: <input class="form-control" ng-model="happeningAddress">
                 </div> 
 
                 <div class="container">
-                    <!-- <div class="row"> -->
-                        <!-- <div class='col-sm-6'> -->
-                            <div class="form-group">
-                                <div class='input-group date inputs'>
-
-                                    Date and Time: <input id='datetimepicker' type='text' class="form-control" ng-model="happeningTime">
-                              
-                                </div>
-                            </div>
-                        <!-- </div> -->
-
-                    <!-- </div> -->
+                  <div class="row">
+                      <div class='col-sm-6'>
+                          <div class="form-group">
+                              <div class='input-group date inputs'>
+                                Date and Time: <input id='datetimepicker' type='text' class="form-control" ng-model="happeningTime">                             
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                 </div>
 
-                
                 <div class="inputs">
                   Description: <textarea class="form-control inputs" ng-model="happeningDescription"></textarea>
                 </div>
+
                 <div class="center inputs">  
                   <button class="btn btn-primary btn-lg" ng-click="addHappening(happeningName, happeningAddress, happeningTime, happeningDescription)">Make it Happen</button>
                 </div>  
+
               </div>
             </div> 
 
             <div ng-repeat="happening in happenings">
-              <div class="panel panel-default source-{{ source }}">  
+              <div class="panel panel-default">  
                 <div class="panel-heading" ng-click="toggleDescriptionVisible(happening)"> 
                   <h2> {{ happening.name }} <h2> 
                   <h3> {{ happening.start_time }} </h3> 
@@ -87,9 +83,9 @@
     function initialize() {
 
       var mapOptions = {
-        center: new google.maps.LatLng(41.8369, -87.7847),
+        center: new google.maps.LatLng(41.90, -87.65),
         scrollWheel: true,
-        zoom: 10
+        zoom: 11
       };
       
       var markers = [
@@ -116,7 +112,7 @@
                   '<div id="bodyContent">'+
                     '<p><b><%= happening.human_time %></b></p>'+
                     '<p><%= happening.address %> '+ 
-                    '<p>LINK <a href="<%= happening.url %>"></p>'+
+                    '<p><a href="<%= happening.url %>">LINK</p>'+
                   '</div>'+
               '</div>');
             <% end %>

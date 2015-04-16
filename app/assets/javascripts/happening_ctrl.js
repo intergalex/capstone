@@ -5,7 +5,6 @@
 
   $scope.happenings = [];
   $scope.show = false;
-  
 
   $scope.fetchData = function() {
     $http.get("/api/v1/happenings.json").then(function(response) {
@@ -14,10 +13,8 @@
   };
 
   $scope.toggleDescriptionVisible = function(happening) {
-
         happening.descriptionVisible = !happening.descriptionVisible;
-
-      };
+  };
 
   $scope.makeTrust = function(html){
         return $sce.trustAsHtml(html);
@@ -39,8 +36,7 @@
         $scope.happeningDescription = null;
       }, function(error) {
         $scope.errors = error.data.errors;
-      });  
-  
+      });   
   };
 
   window.scope = $scope; 

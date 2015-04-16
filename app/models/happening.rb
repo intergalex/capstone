@@ -23,9 +23,9 @@ class Happening
       @name = hash["name"]["text"]
       @description = hash["description"]["html"]
       
-      @address = hash["venue"]["address_1"] if hash["venue"]
-      @lat = hash["venue"]["latitude"]
-      @lon = hash["venue"]["longitude"]
+      @address = hash["venue"]["address"]["address_1"]
+      @lat = hash["venue"]["address"]["latitude"]
+      @lon = hash["venue"]["address"]["longitude"]
       
       @start_time = hash["start"]["local"]
       @formatted_time = human_time  
@@ -69,9 +69,11 @@ class Happening
     meetup_array.each do |meetup_hash|
       @happenings << Happening.new(meetup_hash, "meetup")
     end
+
     eventbrite_array.each do |eventbrite_hash|
       @happenings << Happening.new(eventbrite_hash, "eventbrite")
     end
+    
     clearPath_array.each do |clearPath_hash|
       @happenings << Happening.new(clearPath_hash, "clearPath")
     end
